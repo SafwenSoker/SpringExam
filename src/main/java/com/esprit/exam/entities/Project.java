@@ -1,5 +1,6 @@
 package com.esprit.exam.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import java.util.List;
@@ -16,10 +17,11 @@ public class Project {
     private String title;
     private String description;
 
-    @OneToMany(mappedBy="project")
+    @OneToMany(mappedBy="project",cascade = CascadeType.PERSIST)
     private List<Sprint> sprints;
 
     @ManyToMany(mappedBy="projects")
+    @JsonIgnore
     private List<User> users;
 
 }
