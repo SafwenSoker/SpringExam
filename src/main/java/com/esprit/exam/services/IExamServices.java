@@ -34,4 +34,6 @@ public interface IExamServices {
     List<Project> getProjectsByScrumMaster(String fname, String lname);
 
     Sprint addSprintAndAssignToProject(Sprint sprint, int idProject);
+    //Used void return type because scheduler should not return anything
+    void getNbrSprintByCurrentProject();
 }

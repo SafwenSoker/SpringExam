@@ -9,6 +9,7 @@ import com.esprit.exam.repositories.ProjectRepository;
 import com.esprit.exam.repositories.SprintRepository;
 import com.esprit.exam.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -19,7 +20,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @Service
 public class IExamServiceImp implements IExamServices{
-
 
     private final UserRepository userRepository;
     private final SprintRepository sprintRepository;
@@ -146,6 +146,14 @@ public class IExamServiceImp implements IExamServices{
         sprintRepository.saveAndFlush(sprint);
         return sprint;
     }
+    @Scheduled(fixedRate = 30000)
+    @Override
+    public void getNbrSprintByCurrentProject() {
 
+        List<Project> projects = this.getAllCurrentProjects();
+        projects.forEach((p)-> {
+            System.out.println("Project "+p.getTitle() + " have " + p.getSprints().size() + " sprints");
+        });
+    }
 
 }

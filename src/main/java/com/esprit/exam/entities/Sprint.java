@@ -20,6 +20,6 @@ public class Sprint{
     private String description;
     private Date startDate;
     @JsonIgnore
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private Project project;
 }

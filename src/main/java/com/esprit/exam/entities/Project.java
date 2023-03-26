@@ -17,7 +17,7 @@ public class Project {
     private String title;
     private String description;
 
-    @OneToMany(mappedBy="project",cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy="project",cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private List<Sprint> sprints;
 
     @ManyToMany(mappedBy="projects")
