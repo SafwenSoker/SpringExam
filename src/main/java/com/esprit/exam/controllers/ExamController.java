@@ -4,7 +4,6 @@ package com.esprit.exam.controllers;
 import com.esprit.exam.entities.Project;
 import com.esprit.exam.entities.Sprint;
 import com.esprit.exam.entities.User;
-import com.esprit.exam.repositories.SprintRepository;
 import com.esprit.exam.services.IExamServices;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,9 +35,6 @@ public class ExamController {
 
     @DeleteMapping("/projects/{id}")
     public void deleteProject(@PathVariable int id){iExamServices.removeProject(id);}
-
-    @Autowired
-    private SprintRepository sprintRepository;
 
     @GetMapping("/sprints")
     public List<Sprint> getAllSprints(){return iExamServices.retrieveAllSprints();}
@@ -88,6 +84,11 @@ public class ExamController {
     @GetMapping("/projects/scrum_master/{fname}/{lname}")
     public List<Project> getProjectsByScrumMaster(@PathVariable String fname, @PathVariable String lname){
         return iExamServices.getProjectsByScrumMaster(fname, lname);
+    }
+
+    @PostMapping("/sprints/assign_project/{id}")
+    public Sprint addSprintAndAssignToProject(@RequestBody Sprint sprint, @PathVariable int id){
+        return iExamServices.addSprintAndAssignToProject(sprint, id);
     }
 
 }

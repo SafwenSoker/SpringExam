@@ -138,5 +138,14 @@ public class IExamServiceImp implements IExamServices{
         return projectRepository.findAllByUsersRoleAndUsersFnameAndUsersLname(Role.SCRUM_MASTER,fname, lname);
     }
 
+    @Override
+    public Sprint addSprintAndAssignToProject(Sprint sprint, int idProject) {
+        Project project = projectRepository.findById(idProject).orElse(null);
+        Assert.notNull(project, "Project not found");
+        sprint.setProject(project);
+        sprintRepository.saveAndFlush(sprint);
+        return sprint;
+    }
+
 
 }

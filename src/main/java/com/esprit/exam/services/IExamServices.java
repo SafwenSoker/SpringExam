@@ -32,4 +32,6 @@ public interface IExamServices {
     List<Project> getAllCurrentProjects();
 
     List<Project> getProjectsByScrumMaster(String fname, String lname);
+
+    Sprint addSprintAndAssignToProject(Sprint sprint, int idProject);
 }
